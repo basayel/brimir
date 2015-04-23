@@ -4,13 +4,13 @@
       <h3 class="mb"><%= t(:sign_in) %> in Brimir</h3>
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
-        <%= f.label :email %>
+        <%= f.label :username %>
         <div class="row collapse">
           <div class="small-1 columns">
             <span class="prefix"><i class="fa fa-user"></i></span>
           </div>
           <div class="small-11 columns">
-            <%= f.email_field :email, label: false %>
+            <%= f.text_field :username, label: false %>
           </div>
         </div>
 

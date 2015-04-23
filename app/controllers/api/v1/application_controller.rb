@@ -26,7 +26,7 @@ class Api::V1::ApplicationController < ActionController::Base
     user = user_token && User.where(authentication_token: user_token.to_s).first
 
     if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
-      sign_in user, store: false
+      sign_in user, store: true
     else
       redirect_to new_user_session_url
     end

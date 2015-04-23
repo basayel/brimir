@@ -17,7 +17,7 @@
 class User < ActiveRecord::Base
   devise Rails.application.config.devise_authentication_strategy, :recoverable,
     :rememberable, :trackable, :validatable,:omniauthable,
-    omniauth_providers: [:google_oauth2]
+    omniauth_providers: [:google_oauth2], :authentication_keys => [:username]
 
   has_many :tickets, dependent: :destroy
   has_many :replies, dependent: :destroy

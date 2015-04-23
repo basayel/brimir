@@ -1,0 +1,15 @@
+default: &defaults
+  redis_namespace: "saifi-redis"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+  server_host: "saifi.espace.ws"

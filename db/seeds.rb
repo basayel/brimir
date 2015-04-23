@@ -15,10 +15,10 @@ customer = User.where(email: 'customer@getbrimir.com').first_or_create({ email: 
 customer.save!
 
 labels = [
-    'bug',
-    'feedback',
-    'feature-request',
-    'change-request',
+  'bug',
+  'feedback',
+  'feature-request',
+  'change-request',
 ]
 
 customer.labels << Label.where(name: labels.sample).first_or_create!

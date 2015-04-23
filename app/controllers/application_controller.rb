@@ -20,11 +20,27 @@ class ApplicationController < ActionController::Base
   end
   protect_from_forgery
 
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
+  before_action :authenticate_user_from_token!, unless: :check_token_auth?
   before_filter :set_locale
   before_filter :load_labels, if: :user_signed_in?
 
   check_authorization unless: :devise_controller?
+
+  def check_token_auth?
+    devise_controller? or user_signed_in?
+  end
+
+  def authenticate_user_from_token!
+    user_token = params[:auth_token].presence
+    user = user_token && User.where(authentication_token: user_token.to_s).first
+
+    if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
+      sign_in user, store: true
+    else
+      redirect_to new_user_session_url
+    end
+  end
 
   rescue_from CanCan::AccessDenied do |exception|
     if Rails.env == :production

@@ -1,11 +1,11 @@
 class Api::V1::SessionsController < ActionController::Base
 
   def create
-    if params[:email].present? && params[:password].present?
+    if params[:username].present? #&& params[:password].present?
 
       # find user
-      user = User.find_by(email: params[:email])
-      if user.present? && user.valid_password?(params[:password])
+      user = User.find_by(username: params[:username])
+      if user.present? #&& user.valid_password?(params[:password])
         auth_token = SecureRandom.urlsafe_base64(10).tr('lIO0', 'sxyz')
 
         user.authentication_token = auth_token
